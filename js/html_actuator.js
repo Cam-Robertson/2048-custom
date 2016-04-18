@@ -68,7 +68,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   inner.textContent = tile.value;
   //Adaption Start
   if(window.config_2048.data){
-    inner.textContent = config_2048.data[tile.value] || tile.value;
+    inner.textContent = config_2048.data[Math.log2(tile.value)-1] || tile.value;
     if(inner.textContent.substring(0,4)=='http'){
       inner.innerHTML = '<img src="'+inner.textContent+'" class="tile-inner"/>';
     }
@@ -142,7 +142,7 @@ HTMLActuator.prototype.message = function (won, score) {
   var type    = won ? "game-won" : "game-over";
   //Adaption Start
   //var message = won ? "You win!" : "Game over!";
-  var message = won ?  (config_2048.done || "You win!") : (config_2048.mark[score] || "Game over!");
+  var message = won ?  (config_2048.done || "You win!") : (config_2048.mark[Math.log2(score)-1] || "Game over!");
   //Adaption Close
 
   this.messageContainer.classList.add(type);
